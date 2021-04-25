@@ -8,8 +8,10 @@ namespace OfficeSolutions.Models
 {
 
     public enum ProductType { Notebook, Pen, Paper, Tape, Envelope, Diary }
+
     public class StationaryItem
     {
+
         [Key]
         public int ProductID { get; set; }
         [Required(ErrorMessage = "A Name is required for this field")]

@@ -19,9 +19,21 @@ namespace OfficeSolutions.Controllers
         }
 
         // GET: Shops
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Shops.ToListAsync());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "shopname_desc" : "";
+
+            var shops = from s in _context.Shops
+                        select s;
+
+            switch (sortOrder)
+            {
+                default:
+                    shops = shops.OrderBy(s => s.ShopName);
+                    break;
+            }
+
+            return View(shops.ToList());
         }
 
         // GET: Shops/Details/5
